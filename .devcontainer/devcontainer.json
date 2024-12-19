@@ -1,0 +1,15 @@
+{
+  "name": "ASP.NET Core Development",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp"
+      ]
+    }
+  },
+  "forwardPorts": [5000, 5001]
+}
