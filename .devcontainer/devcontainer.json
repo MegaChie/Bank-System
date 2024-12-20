@@ -21,5 +21,5 @@
     }
   },
   "forwardPorts": [5000, 5001, 1433],
-  "postCreateCommand": "dotnet restore"
+  "postCreateCommand": "dotnet add package Serilog.AspNetCore && dotnet add package Microsoft.EntityFrameworkCore.SqlServer && dotnet tool install --global dotnet-ef && dotnet restore"
 }
