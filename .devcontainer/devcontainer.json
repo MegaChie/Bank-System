@@ -8,18 +8,10 @@
     "vscode": {
       "extensions": [
         "ms-dotnettools.csharp",
-        "mssql"
+        "ms-python.python"
       ]
     }
   },
-  "features": {
-    "ghcr.io/devcontainers/features/mssql:1": {
-      "version": "2019"
-    },
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.8"
-    }
-  },
-  "forwardPorts": [5000, 5001, 1433],
-  "postCreateCommand": "dotnet tool install --global dotnet-ef && dotnet add package Microsoft.EntityFrameworkCore.SqlServer && dotnet add package Serilog.AspNetCore && dotnet restore"
+  "forwardPorts": [5000, 5001],
+  "postCreateCommand": "dotnet new webapi -o MyApi && cd MyApi && dotnet restore"
 }
