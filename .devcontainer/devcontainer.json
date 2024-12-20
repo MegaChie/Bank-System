@@ -7,9 +7,19 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-dotnettools.csharp"
+        "ms-dotnettools.csharp",
+        "mssql"
       ]
     }
   },
-  "forwardPorts": [5000, 5001]
+  "features": {
+    "ghcr.io/devcontainers/features/mssql:1": {
+      "version": "2019"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.8"
+    }
+  },
+  "forwardPorts": [5000, 5001, 1433],
+  "postCreateCommand": "dotnet restore"
 }
