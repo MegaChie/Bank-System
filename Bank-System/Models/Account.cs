@@ -4,8 +4,8 @@ namespace Bank_System.Models
     {
         public int ID { get; set; }
         public decimal Balance { get; set; }
-        public DateTime Created { get; set }
-        public string? AccountType { get; set }
+        public DateTime Created { get; set; }
+        public string? AccountType { get; set; }
         public string? AccountNumber { get; set; }
 
         public abstract void Withdraw(decimal amount);
