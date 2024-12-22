@@ -1,6 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Authentication;
-
 namespace Bank_System.Models
 {
     public class Transaction

@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using System.Transactions;
 using Bank_System.Models;
 using Bank_System.Repositories.Interfaces;
 
@@ -89,6 +88,11 @@ namespace Bank_System.Services
                 throw new KeyNotFoundException("Dis account aint there");
             }
             return account.Balance;
+        }
+
+        public async Task AddAccountAsync(Account account)
+        {
+            await _accountRepository.AddAccountAsync(account);
         }
     }
 }

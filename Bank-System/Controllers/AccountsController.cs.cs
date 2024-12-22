@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Bank_System.Services;
+using Bank_System.Models;
 
 namespace Bank_System.Controllers
 {
@@ -40,6 +41,13 @@ namespace Bank_System.Controllers
         {
             var balance = await _accountService.GetBalanceAsync(ID);
             return Ok(balance);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAcount([FromBody] Account account)
+        {
+            await _accountService.AddAccountAsync(account);
+            return CreatedAtAction(nameof(GetBalance), new { id = account.ID }, account);
         }
     }
 
