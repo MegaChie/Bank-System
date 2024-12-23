@@ -44,10 +44,36 @@ namespace Bank_System.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAcount([FromBody] Account account)
+        public async Task<IActionResult> AddAcount([FromBody] AccountDto accountDto)
         {
+            Account account;
+            if (accountDto.AccountType == "Checking")
+            {
+                account = new CheckingAccount
+                {
+                    AccountNumber = accountDto.AccountNumber,
+                    Balance = accountDto.Balance,
+                    Overdraft = accountDto.OverdraftLimit ?? 521
+                };
+
+            }
+            else if (accountDto.AccountType == "Savings")
+            {
+                account = new SavingsAccount
+                {
+                    AccountNumber = accountDto.AccountNumber,
+                    Balance = accountDto.Balance,
+                    Intrest = accountDto.InterestRate ?? 0.04M
+                };
+            }
+            else
+            {
+                return BadRequest("Wrong AccountType. Use 'Checking' or 'Savings'.");
+            }
+
             await _accountService.AddAccountAsync(account);
-            return CreatedAtAction(nameof(GetBalance), new { id = account.ID }, account);
+            return CreatedAtAction(nameof(GetBalance), new { id = account.ID },
+                                   account);
         }
     }
 
