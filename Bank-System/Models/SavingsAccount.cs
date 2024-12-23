@@ -1,5 +1,3 @@
-using System.Diagnostics.Contracts;
-
 namespace Bank_System.Models
 {
     public class SavingsAccount : Account

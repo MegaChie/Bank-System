@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Bank_System.Models;
 
 namespace Bank_System.Repositories.Interfaces
