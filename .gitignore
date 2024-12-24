@@ -199,3 +199,6 @@ FakesAssemblies/
 
 #Ignore JSON
 *.json
+
+# Py cache
+__pycache__

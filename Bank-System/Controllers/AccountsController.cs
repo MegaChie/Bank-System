@@ -18,28 +18,47 @@ namespace Bank_System.Controllers
         public async Task<IActionResult> Deposit([FromBody] DepositRequest request)
         {
             await _accountService.DepositAsync(request.AccountID, request.Amount);
-            return Ok("Deposit success!");
+            return Ok(new
+            {
+                Message = "Deposit successful.",
+                Target = request.AccountID,
+                Amount = request.Amount
+            });
         }
 
         [HttpPost("withdraw")]
         public async Task<IActionResult> Withdraw([FromBody] WithdrawRequest request)
         {
             await _accountService.WithdrawAsync(request.AccountID, request.Amount);
-            return Ok("Withdraw success!");
+            return Ok(new
+            {
+                Message = "Withdrawal successful.",
+                Target = request.AccountID,
+                Amount = -request.Amount
+            });
         }
 
         [HttpPost("transfer")]
         public async Task<IActionResult> Transfer([FromBody] TransferRequest request)
         {
             await _accountService.TransferAsync(request.FromAccountId, request.ToAccountId, request.Amount);
-            return Ok("Transfare success!");
+            return Ok(new
+            {
+                Message = "Transfer successful.",
+                Source = request.FromAccountId,
+                Target = request.ToAccountId,
+                Amount = request.Amount
+            });
         }
 
         [HttpGet("{ID}/balace")]
         public async Task<IActionResult> GetBalance(int ID)
         {
             var balance = await _accountService.GetBalanceAsync(ID);
-            return Ok(balance);
+            return Ok(new
+            {
+                Balance = balance
+            });
         }
 
         [HttpPost]
@@ -90,8 +109,8 @@ namespace Bank_System.Controllers
 
     public class TransferRequest
     {
-    public int FromAccountId { get; set; }
-    public int ToAccountId { get; set; }
-    public decimal Amount { get; set; }
+        public int FromAccountId { get; set; }
+        public int ToAccountId { get; set; }
+        public decimal Amount { get; set; }
     }
 }

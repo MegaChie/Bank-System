@@ -4,6 +4,11 @@
     "dockerfile": "Dockerfile",
     "context": "."
   },
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+        "version": "3.8"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -13,5 +18,5 @@
     }
   },
   "forwardPorts": [5000, 5001],
-  "postCreateCommand": "dotnet restore"
+  "postCreateCommand": "dotnet restore; pip install requests"
 }
