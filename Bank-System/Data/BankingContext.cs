@@ -18,9 +18,16 @@ namespace Bank_System.Data
                 .HasValue<SavingsAccount>("Savings");
 
             modelBuilder.Entity<Transaction>()
-                .HasOne(t => t.Account)
+                .HasOne(t => t.SenderAccount)
                 .WithMany()
-                .HasForeignKey(t => t.AccountID);
+                .HasForeignKey(t => t.SenderAccountID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Transaction>()
+                .HasOne(t => t.ReceiverAccount)
+                .WithMany()
+                .HasForeignKey(t => t.ReceiverAccountID)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -16,8 +16,8 @@ namespace Bank_System.Repositories
 
         public async Task<IEnumerable<Transaction>> GetTransactionsByAccountIdAsync(int accountID)
         {
-            return await _context.Transactions
-            .Where(t => t.AccountID == accountID)
+            return await _context.Transactions.Where(t =>
+            t.SenderAccountID == accountID || t.ReceiverAccountID == accountID)
             .ToListAsync();
         }
 
