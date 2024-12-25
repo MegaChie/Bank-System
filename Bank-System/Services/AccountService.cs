@@ -26,6 +26,7 @@ namespace Bank_System.Services
 
             var transaction = new Transaction
             {
+                ReceiverAccountID = accountID,
                 Amount = amount,
                 TransactionType = "Deposit",
                 Timestamp = DateTime.UtcNow
@@ -56,6 +57,7 @@ namespace Bank_System.Services
 
             var transaction = new Transaction
             {
+                SenderAccountID = accountID,
                 Amount = -amount,
                 TransactionType = "Withdrawal",
                 Timestamp = DateTime.UtcNow

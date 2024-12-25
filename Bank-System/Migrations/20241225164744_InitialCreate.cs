@@ -35,7 +35,8 @@ namespace Bank_System.Migrations
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    AccountID = table.Column<int>(type: "INTEGER", nullable: false),
+                    SenderAccountID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ReceiverAccountID = table.Column<int>(type: "INTEGER", nullable: true),
                     Amount = table.Column<decimal>(type: "TEXT", nullable: false),
                     TransactionType = table.Column<string>(type: "TEXT", nullable: true),
                     Timestamp = table.Column<DateTime>(type: "TEXT", nullable: false)
@@ -44,17 +45,28 @@ namespace Bank_System.Migrations
                 {
                     table.PrimaryKey("PK_Transactions", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Transactions_Accounts_AccountID",
-                        column: x => x.AccountID,
+                        name: "FK_Transactions_Accounts_ReceiverAccountID",
+                        column: x => x.ReceiverAccountID,
                         principalTable: "Accounts",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Accounts_SenderAccountID",
+                        column: x => x.SenderAccountID,
+                        principalTable: "Accounts",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_AccountID",
+                name: "IX_Transactions_ReceiverAccountID",
                 table: "Transactions",
-                column: "AccountID");
+                column: "ReceiverAccountID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_SenderAccountID",
+                table: "Transactions",
+                column: "SenderAccountID");
         }
 
         /// <inheritdoc />
