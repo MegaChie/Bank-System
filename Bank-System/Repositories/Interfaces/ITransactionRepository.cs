@@ -6,5 +6,6 @@ namespace Bank_System.Repositories.Interfaces
     {
         Task<IEnumerable<Transaction>> GetTransactionsByAccountIdAsync(int AccountID);
         Task AddTransactionAsync(Transaction transaction);
+        Task DeleteTransactionByAccountID(int AccountID);
     }
 }

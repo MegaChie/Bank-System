@@ -93,6 +93,17 @@ namespace Bank_System.Controllers
             return CreatedAtAction(nameof(GetBalance), new { id = account.ID },
                                    account);
         }
+
+        [HttpDelete("{accountID}")]
+        public async Task<IActionResult> DeleteAccount(int accountID)
+        {
+            await _accountService.DeleteAccountAsync(accountID);
+            return Ok(new
+            {
+                Message = "Account records purged.",
+                AccountID = accountID,
+            });
+        }
     }
 
     public class DepositRequest

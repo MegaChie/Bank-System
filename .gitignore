@@ -192,13 +192,10 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-.vscode/settings.json
-
+.vscode/*
 #Ignore APK
 *.apk
 
-#Ignore JSON
-*.json
 
 # Py cache
 __pycache__

@@ -26,7 +26,7 @@ namespace Bank_System.Services
 
             var transaction = new Transaction
             {
-                AccountID = accountID,
+                ReceiverAccountID = accountID,
                 Amount = amount,
                 TransactionType = "Deposit",
                 Timestamp = DateTime.UtcNow
@@ -57,7 +57,7 @@ namespace Bank_System.Services
 
             var transaction = new Transaction
             {
-                AccountID = accountID,
+                SenderAccountID = accountID,
                 Amount = -amount,
                 TransactionType = "Withdrawal",
                 Timestamp = DateTime.UtcNow
@@ -76,7 +76,6 @@ namespace Bank_System.Services
 
             await WithdrawAsync(fromAccountID, amount);
             await DepositAsync(toAccountID, amount);
-
         }
 
         public async Task<decimal> GetBalanceAsync(int accountID)
@@ -92,6 +91,12 @@ namespace Bank_System.Services
         public async Task AddAccountAsync(Account account)
         {
             await _accountRepository.AddAccountAsync(account);
+        }
+
+        public async Task DeleteAccountAsync(int accountID)
+        {
+            await _transactionRepository.DeleteTransactionByAccountID(accountID);
+            await _accountRepository.DeleteAccountAsync(accountID);
         }
     }
 }

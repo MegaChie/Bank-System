@@ -17,7 +17,15 @@ namespace Bank_System.Controllers
         public async Task<IActionResult> GetTransactions(int accountID)
         {
             var transactions = await _transactionService.GetTransactionsByAccountIdAsync(accountID);
-            return Ok(transactions);
+            return Ok(transactions.Select(t => new
+            {
+                t.ID,
+                t.SenderAccountID,
+                t.Amount,
+                t.ReceiverAccountID,
+                t.TransactionType,
+                t.Timestamp
+            }));
         }
     }
 }

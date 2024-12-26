@@ -52,11 +52,14 @@ namespace Bank_System.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AccountID")
-                        .HasColumnType("INTEGER");
-
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("ReceiverAccountID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("SenderAccountID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("TEXT");
@@ -66,7 +69,9 @@ namespace Bank_System.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AccountID");
+                    b.HasIndex("ReceiverAccountID");
+
+                    b.HasIndex("SenderAccountID");
 
                     b.ToTable("Transactions");
                 });
@@ -93,13 +98,19 @@ namespace Bank_System.Migrations
 
             modelBuilder.Entity("Bank_System.Models.Transaction", b =>
                 {
-                    b.HasOne("Bank_System.Models.Account", "Account")
+                    b.HasOne("Bank_System.Models.Account", "ReceiverAccount")
                         .WithMany()
-                        .HasForeignKey("AccountID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReceiverAccountID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Account");
+                    b.HasOne("Bank_System.Models.Account", "SenderAccount")
+                        .WithMany()
+                        .HasForeignKey("SenderAccountID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("ReceiverAccount");
+
+                    b.Navigation("SenderAccount");
                 });
 #pragma warning restore 612, 618
         }
