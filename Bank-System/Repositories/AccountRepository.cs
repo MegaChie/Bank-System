@@ -38,7 +38,7 @@ namespace Bank_System.Repositories
 
         public async Task DeleteAccountAsync(int ID)
         {
-            var account = await GetAccountByIdAsync(ID);
+            var account = await _context.Accounts.FindAsync(ID);
             if (account != null)
             {
                 _context.Accounts.Remove(account);

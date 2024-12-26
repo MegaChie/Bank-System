@@ -113,5 +113,11 @@ namespace Bank_System.Services
         {
             await _accountRepository.AddAccountAsync(account);
         }
+
+        public async Task DeleteAccountAsync(int accountID)
+        {
+            await _transactionRepository.DeleteTransactionByAccountID(accountID);
+            await _accountRepository.DeleteAccountAsync(accountID);
+        }
     }
 }
